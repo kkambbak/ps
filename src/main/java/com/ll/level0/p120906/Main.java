@@ -30,4 +30,5 @@ class Solution{
                 .map(Character::getNumericValue) //intStream[49,50,51] -> intStream[1,2,3]
                 .sum(); // intStream[1,2,3] -> 6
     }
+
 }
