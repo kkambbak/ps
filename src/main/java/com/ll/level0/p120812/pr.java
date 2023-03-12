@@ -1,7 +1,6 @@
-package com.ll.level0.p120851;
+package com.ll.level0.p120812;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class pr {
     public static void main(String[] args) {
