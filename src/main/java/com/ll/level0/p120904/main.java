@@ -18,3 +18,9 @@ class Solution {
         return answer;
     }
 }
+class SolutionV2 {
+    public int solution(int num, int k) {
+        return ("-" + num).indexOf(String.valueOf(k));
+    }
+}
+
