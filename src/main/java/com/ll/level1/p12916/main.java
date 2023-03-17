@@ -1,12 +1,6 @@
-package com.ll.level0;
+package com.ll.level1.p12916;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.OptionalDouble;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-public class pr {
+public class main {
     public static void main(String[] args) {
 
         boolean answer = true;
