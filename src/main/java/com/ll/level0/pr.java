@@ -9,11 +9,15 @@ import java.util.stream.IntStream;
 
 public class pr {
     public static void main(String[] args) {
-        String[] seoul = new String[]{"Jane", "Kim"};
+        String my_string = "3 + 4 + 6";
+        my_string= my_string.replaceAll(" - ", " + -");
+        String[] s = my_string.split(" \\+ ");
+        int sum = Arrays.stream(s).mapToInt(Integer::parseInt).sum();
+        System.out.println(sum);
+        StringBuilder sb= new StringBuilder();
+        sb.append("*");
+        sb.append("*".repeat(3));
 
-        String answer = "";
-        int idx = Arrays.stream(seoul).toList().indexOf("Kim");
-        answer = "김서방은 "+idx+"에 있다.";
-        System.out.println(answer);
+
     }
 }
