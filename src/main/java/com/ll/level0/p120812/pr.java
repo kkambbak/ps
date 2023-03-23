@@ -4,37 +4,31 @@ import java.util.*;
 
 public class pr {
     public static void main(String[] args) {
-        int[] array = {1};
-        int answer = -1; // 최빈값이 없는 경우 -1을 할당
 
-        HashMap<Integer, Integer> counts = new HashMap<>();
-        int maxCount = 0;
-        int maxIdx = -1;
-        boolean isDuplicate = false;
+    }
 
-        for(int i : array) {
-            if (counts.containsKey(i)) {
-                int count = counts.get(i) + 1;
-                counts.put(i, count);
-                if (count > maxCount) {
-                    maxCount = count;
-                    maxIdx = i;
-                    isDuplicate = false;
-                } else if (count == maxCount) {
-                    isDuplicate = true;
+}
+
+class Solution{
+   int solution(){
+        int[] array = {1, 2, 3, 3, 3,3,3, 4,4,4};
+        int answer = 0;
+        int[] counts = new int[1000];
+        Arrays.fill(counts, 0);
+        for(int i = 0 ; i< array.length; i++){
+            counts[array[i]]++;
+        }
+        int max = Arrays.stream(counts).max().getAsInt();
+        boolean check=true;
+        for (int i = 0; i < counts.length; i++){
+            if (counts[i] == max){
+                if(check){
+                    check = false;
+                    answer = i;
                 }
-            } else {
-                counts.put(i, 1);
-                if (maxCount == 0) { // 최빈값이 없는 경우에는 첫 번째 값을 기본값으로 설정
-                    maxCount = 1;
-                    maxIdx = i;
-                }
+                else return -1;
             }
         }
-
-        if (!isDuplicate && maxCount > 1) { // 최빈값이 중복이 아니면서, 등장횟수가 1보다 큰 경우
-            answer = maxIdx;
-        }
-        System.out.println(answer);
+        return answer;
     }
 }

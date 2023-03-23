@@ -17,6 +17,9 @@ public class pr {
         StringBuilder sb= new StringBuilder();
         sb.append("*");
         sb.append("*".repeat(3));
+        int i = 1231;
+        int x = Integer.reverse(i);
+        System.out.println(x);
 
 
     }
