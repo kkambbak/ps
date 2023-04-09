@@ -23,5 +23,6 @@ class Solution {
             if(A.equals(B)) return i+1;
         }
         return -1;
+
     }
 }
