@@ -34,7 +34,7 @@ class Solution {
             y--;
             count2++;
             for (int i = 0; i < n; i++) {
-                triangle[y-i][n-i+x-1] = num++;
+                triangle[y-i][n+x-1 -i] = num++;
             }
             n--;
 
