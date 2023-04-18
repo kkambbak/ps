@@ -18,7 +18,7 @@ class Solution {
         long yMax = Long.MIN_VALUE;
         long yMin = Long.MAX_VALUE;
 
-        List<long[]> xyArr = new ArrayList<>();
+        Points points = new Points(new ArrayList<>());
 
         //교점구하기
         for (int i = 0; i < line.length; i++) {
@@ -30,14 +30,11 @@ class Solution {
                     yMax = Math.max(yMax,xy[1]);
                     yMin = Math.min(yMin,xy[1]);
 
-                    xyArr.add(xy);
+                    points.add(xy);
                 }
             }
         }
-
-        long finalXMin = xMin;
-        long finalYMax = yMax;
-        xyArr = xyArr.stream().map(i -> new long[]{i[0]- finalXMin, finalYMax-i[1]}).collect(Collectors.toList());
+        points.convertToMatrix(xMin,yMax);
 
         //좌표계 만들기
         long xGap = xMax - xMin;
@@ -48,8 +45,8 @@ class Solution {
             Arrays.fill(stars[i],'.');
         }
 
-        for (int i = 0; i < xyArr.size(); i++) {
-            stars[(int) xyArr.get(i)[1]][(int) xyArr.get(i)[0]] = '*';
+        for (int i = 0; i < points.size(); i++) {
+            stars[ points.getY(i) ][ points.getX(i) ] = '*';
         }
 
         String[] answer = new String[(int)yGap+1];
@@ -64,10 +61,7 @@ class Solution {
         System.out.println(Arrays.toString(answer));
         return answer;
     }
-
-    long[] CalXY(int[] s1, int[]s2){
-
-
+    private long[] CalXY(int[] s1, int[]s2){
         long divideBy = ((long)s1[0]*(long)s2[1] - (long)s1[1]*(long)s2[0]);
         if (divideBy == 0) return new long[]{Long.MAX_VALUE,Long.MAX_VALUE};
 
@@ -81,5 +75,36 @@ class Solution {
             return new long[]{x, y};
         }
         return new long[]{Long.MAX_VALUE,Long.MAX_VALUE};
+    }
+
+    private class Points {
+        private List<long[]> points;
+        public Points(List<long[]> points) {
+            this.points = points;
+        }
+
+        private void add(long[] point) {
+            points.add(point);
+        }
+
+        private void convertToMatrix(long finalXMin, long finalYMax) {
+            points = points.stream().map(i -> new long[]{i[0]- finalXMin, finalYMax-i[1]}).collect(Collectors.toList());
+        }
+
+        private int size() {
+            return points.size();
+        }
+
+        private long[] get(int i) {
+            return points.get(i);
+        }
+
+        private int getY(int i) {
+            return (int)points.get(i)[1];
+        }
+
+        public int getX(int i) {
+            return (int)points.get(i)[0];
+        }
     }
 }
