@@ -52,6 +52,7 @@ class Solution {
 
         //종료조건
         if (index == visitedLength.length-1) {
+            //같은 길이의 셋인지 체크
             if (newSet.size() == visitedLength.length) {
                 EntireSet.add(newSet);
             }
