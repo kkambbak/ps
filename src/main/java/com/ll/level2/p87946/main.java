@@ -1,47 +1,34 @@
 package com.ll.level2.p87946;
 
 import java.util.*;
+
 public class main {
+    public static void main(String[] args) {
+
+    }
 }
 
 class Solution {
-    private static int minNeedP;
+    private static boolean[] check;
+    private static int resultX;
 
     public int solution(int k, int[][] dungeons) {
         int answer = -1;
-        int[] min = Arrays.stream(dungeons).min(Comparator.comparingInt(i -> i[0])).get();
-        minNeedP = min[0];
-        for(int i = 0; i< dungeons.length; i++){
-            tour(k, dungeons, new boolean[dungeons.length], 0, 0, i);
-        }
-        answer= resultX;
+        check = new boolean[dungeons.length];
+        tour(k,dungeons,0);
+        answer = resultX;
         return answer;
     }
-    private static int resultX;
 
-    void tour(int k, int[][]dungeons, boolean[] checkDungeons,int count,int result,int num){
-        //카운트
-        if(k>=dungeons[num][0]){
-            k-=dungeons[num][1];
-            checkDungeons[num] = true;
-            count+=1;
-            result+=1;
-        }
+    void tour(int k, int[][] dungeons, int count) {
 
-
-        //종료조건
-        if (k< minNeedP || count==dungeons.length){
-            resultX = Math.max(result, resultX);
-            return;
-        }
-
-        //재귀 호출
-        for(int i = 0; i<dungeons.length; i++){
-            boolean[] newArr = Arrays.copyOf(checkDungeons, checkDungeons.length);
-            if(!checkDungeons[i]){
-                if(k>=dungeons[i][0])
-                    tour(k, dungeons, newArr, count, result, i);
+        for (int i = 0; i < dungeons.length; i++) {
+            if (!check[i] && k >= dungeons[i][0]) {
+                check[i] = true;
+                tour(k-dungeons[i][1], dungeons, count+1);
+                check[i] = false;
             }
+            resultX = Math.max(count,resultX);
         }
     }
 }
