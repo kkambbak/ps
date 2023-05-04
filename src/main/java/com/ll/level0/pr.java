@@ -9,15 +9,15 @@ import java.util.stream.IntStream;
 
 
 public class pr {
+
     public static void main(String[] args) {
-        for (int i = 'a'; i <= 'z'; i++) {
-            char ci = (char) i;
-            for (int j = 'a'; j <= 'z'; j++) {
-                char cj = (char) j;
-                System.out.println("" + ci + cj+".kr");
-            }
-        }
+        int[][] dungeons = new int[4][4];
+        int[] x = Arrays.stream(dungeons).min(Comparator.comparingInt(i -> i[0])).get();
+        minNeedP = x[0];
+        Arrays.copyOf(dungeons, dungeons.length);
     }
+
+    private static int minNeedP;
 }
 abstract class ProcessingObject<T> {
     protected ProcessingObject<T> successor;
