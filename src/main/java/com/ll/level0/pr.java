@@ -10,16 +10,37 @@ import java.util.stream.IntStream;
 
 public class pr {
     public static void main(String[] args) {
-        List<Integer> l = List.of(1,2,3,4,4,4,5,6,7,8);
+        for (int i = 'a'; i <= 'z'; i++) {
+            char ci = (char) i;
+            for (int j = 'a'; j <= 'z'; j++) {
+                char cj = (char) j;
+                System.out.println("" + ci + cj+".kr");
+            }
+        }
+    }
+}
+abstract class ProcessingObject<T> {
+    protected ProcessingObject<T> successor;
+    public void setSuccessor(ProcessingObject<T> successor) {
+        this.successor = successor;
+    }
 
-        l.stream().filter(i->i>4)
-                .forEach(System.out::println);
+    public T handle(T input) {
+        T output = handleWork(input);
+        if (successor != null) return successor.handle(output);
+        return output;
+    }
 
-        l.stream()
-                .distinct()
-                .forEach(System.out::println);
+    abstract protected T handleWork(T input);
+}
+class HeaderTextProcessing extends ProcessingObject<String>{
+    public String handleWork(String text){
+        return "From Raoul, : " + text;
+    }
+}
 
-
-
+class SpellCheckerProcessing extends ProcessingObject<String>{
+    public String handleWork(String text){
+        return text.replaceAll("labda", "lambda");
     }
 }
