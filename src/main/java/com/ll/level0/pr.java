@@ -11,36 +11,31 @@ import java.util.stream.IntStream;
 public class pr {
 
     public static void main(String[] args) {
-        int[][] dungeons = new int[4][4];
-        int[] x = Arrays.stream(dungeons).min(Comparator.comparingInt(i -> i[0])).get();
-        minNeedP = x[0];
-        Arrays.copyOf(dungeons, dungeons.length);
-    }
+        List<Integer> li = List.of(100,101,102,103,103,104,145,146,150,151,152,200,201,300);
+        ArrayList<Integer> list = new ArrayList<>(li);
 
-    private static int minNeedP;
-}
-abstract class ProcessingObject<T> {
-    protected ProcessingObject<T> successor;
-    public void setSuccessor(ProcessingObject<T> successor) {
-        this.successor = successor;
-    }
+        int num = binarySearch(list, 149);
+        System.out.println(num);
 
-    public T handle(T input) {
-        T output = handleWork(input);
-        if (successor != null) return successor.handle(output);
-        return output;
-    }
+        String s = "sdf";
+        String s2 = s;
 
-    abstract protected T handleWork(T input);
-}
-class HeaderTextProcessing extends ProcessingObject<String>{
-    public String handleWork(String text){
-        return "From Raoul, : " + text;
+        s2+="ddd";
+        System.out.println(s);
     }
-}
+    private static int binarySearch(ArrayList<Integer> list, int target){
+        int start = 0;
+        int end = list.size() - 1;
 
-class SpellCheckerProcessing extends ProcessingObject<String>{
-    public String handleWork(String text){
-        return text.replaceAll("labda", "lambda");
+        while(end >= start){
+            int mid = (start + end) / 2;
+            if(list.get(mid) < target){
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return list.size() - start;
     }
 }
