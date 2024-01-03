@@ -4,16 +4,15 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 
 public class Main {
     static final int[] dx = new int[]{0, -1, 1};
     static int k;
     static int n;
+
+    static Deque<Integer> stack = new ArrayDeque<>();
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,8 +26,26 @@ public class Main {
         }
         br.close();
 
-        bfs(field);
-        String s = getList(field);
+
+        if(k < n){
+            field[k][0] = n - k;
+            while(k!=n){
+                stack.offer(n);
+                n--;
+            }
+            stack.offer(n);
+
+        } else{
+            bfs(field);
+            push(field);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while(!stack.isEmpty()){
+            sb.append(stack.pop());
+            sb.append(' ');
+        }
+        String s = sb.toString();
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         bw.write(String.valueOf(field[k][0]));
@@ -38,16 +55,13 @@ public class Main {
         bw.close();
     }
 
-    private static String getList(int[][] field) {
+    private static void push(int[][] field) {
         int iter = k;
-        StringBuilder sb = new StringBuilder();
         while (iter != n) {
-            sb.insert(0, iter);
-            sb.insert(0, ' ');
+            stack.push(iter);
             iter = field[iter][1];
         }
-        sb.insert(0, n);
-        return sb.toString();
+        stack.push(n);
     }
 
     private static void bfs(int[][] field) {
@@ -58,12 +72,8 @@ public class Main {
         while (!que.isEmpty()) {
             int num = que.poll();
             for (int i = 0; i < 3; i++) {
-                int nx;
-                if (i == 0) {
-                    nx = num * 2;
-                } else {
-                    nx = num + dx[i];
-                }
+
+                int nx = (i == 0) ? num * 2 : num + dx[i];
                 if (nx < 0 || nx > 100000) continue;
                 if (field[nx][0] != -1) continue;
 
