@@ -60,9 +60,9 @@ class Solution {
         
         int[] a = resultLi.stream().sorted((o1, o2) -> {
             if(o2[0] != o1[0]) {
-                return Integer.compare(o2[0], o1[0]); 
+                return o2[0] - o1[0];
             } else {
-                return Integer.compare(o2[1], o1[1]); 
+                return o2[1] - o1[1]; 
             }
         }).collect(Collectors.toList()).get(0);
         
