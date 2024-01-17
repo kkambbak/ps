@@ -31,9 +31,7 @@ public class Main {
         }
         int cnt = 0;
         HashSet<Integer> friends = new HashSet<>(sets[1]);
-        Iterator<Integer> it = sets[1].iterator();
-        while(it.hasNext()){
-            int x = it.next();
+        for (int x : sets[1]) {
             friends.addAll(sets[x]);
         }
         friends.remove(1);
