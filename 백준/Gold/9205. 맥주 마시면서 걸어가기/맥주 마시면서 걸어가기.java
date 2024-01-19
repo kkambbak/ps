@@ -36,10 +36,8 @@ public class Main {
     }
 
     private static String solution(int[][] arr) {
-        int[] home = arr[0];
-        int[] rock = arr[arr.length - 1];
 
-        ArrayList[] adjList = make(arr, home, rock);
+        ArrayList[] adjList = make(arr);
         return bfs(adjList);
     }
 
@@ -59,13 +57,13 @@ public class Main {
                 int nextNode = (int) adjList[poll].get(i);
                 if(!visited[nextNode])
                     que.add(nextNode);
-                
+
             }
         }
         return "sad";
     }
 
-    private static ArrayList[] make(int[][] arr, int[] home, int[] rock) {
+    private static ArrayList[] make(int[][] arr) {
         ArrayList<Integer>[] adjList = new ArrayList[arr.length];
         for (int i = 0; i < adjList.length; i++) {
             adjList[i] = new ArrayList<>();
