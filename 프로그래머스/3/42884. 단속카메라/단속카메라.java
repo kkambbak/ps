@@ -4,7 +4,7 @@ class Solution {
     public int solution(int[][] routes) {
         int answer = 0;
         
-        Arrays.sort(routes, (i,j)->i[1]-j[1]);
+        Arrays.sort(routes, (i,j) -> i[1]-j[1]);
         
         int temp = routes[0][1];
         answer++;
