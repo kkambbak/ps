@@ -1,25 +1,26 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 class Solution {
     public int solution(int[] topping) {
         int answer = 0;
         
-        Set<Integer> set1 = Arrays.stream(topping, 0, 1).boxed().collect(Collectors.toSet());
-        Set<Integer> set2 = Arrays.stream(topping, 1, topping.length).boxed().collect(Collectors.toSet());
+        int[] left = new int[10001];
+        int[] right = new int[10001];
         
-        if(set1.size() == set2.size()) answer++;
+        int rCnt = 0;
+        int lCnt = 0;
         
-        for(int i = 1; i < topping.length; i++){
-            set1.add(topping[i]);
-            set2.remove(topping[i]);
-            for(int j = i+1; j < topping.length; j++){
-                if(topping[j] == topping[i]){
-                    set2.add(topping[i]);
-                    break;
-                }
-            }
-            if(set1.size() == set2.size()) answer++;
+        for(int i: topping) right[i]++;
+        for(int i: right){
+            if(i!=0) rCnt++;
+        }
+        for(int i: topping){
+            right[i]--;
+            if(right[i]==0) rCnt--;
+            
+            if(left[i]==0) lCnt++;
+            left[i]++;
+            if(rCnt==lCnt) answer++;
         }
         
         return answer;
